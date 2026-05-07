@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ $json.name }} – Fresh. Fast. Easy.</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --sky: #4FC3F7;
+    --aqua: #E0F7FA;
+    --aqua-mid: #B2EBF2;
+    --navy: #0D47A1;
+    --navy-light: #1565C0;
+    --white: #FFFFFF;
+    --text: #1A2340;
+    --text-light: #4A5568;
+    --shadow: 0 4px 24px rgba(13,71,161,0.10);
+    --radius: 18px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--white);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  h1,h2,h3,h4 { font-family: 'Poppins', sans-serif; }
+
+  /* ===================== HERO ===================== */
+  #hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, #E0F7FA 0%, #B3E5FC 50%, #81D4FA 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px 60px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  /* Background bubbles */
+  .bg-bubble {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    animation: bgFloat linear infinite;
+  }
+  .bg-bubble:nth-child(1)  { width:80px;  height:80px;  left:5%;   animation-duration:9s;  animation-delay:0s;   bottom:-80px; }
+  .bg-bubble:nth-child(2)  { width:50px;  height:50px;  left:15%;  animation-duration:12s; animation-delay:2s;   bottom:-50px; }
+  .bg-bubble:nth-child(3)  { width:120px; height:120px; left:25%;  animation-duration:10s; animation-delay:1s;   bottom:-120px; }
+  .bg-bubble:nth-child(4)  { width:40px;  height:40px;  left:40%;  animation-duration:8s;  animation-delay:3s;   bottom:-40px; }
+  .bg-bubble:nth-child(5)  { width:90px;  height:90px;  left:55%;  animation-duration:11s; animation-delay:0.5s; bottom:-90px; }
+  .bg-bubble:nth-child(6)  { width:60px;  height:60px;  left:70%;  animation-duration:14s; animation-delay:4s;   bottom:-60px; }
+  .bg-bubble:nth-child(7)  { width:100px; height:100px; left:82%;  animation-duration:9s;  animation-delay:1.5s; bottom:-100px; }
+  .bg-bubble:nth-child(8)  { width:35px;  height:35px;  left:90%;  animation-duration:13s; animation-delay:2.5s; bottom:-35px; }
+
+  @keyframes bgFloat {
+    0%   { transform: translateY(0) scale(1);   opacity:0; }
+    10%  { opacity: 0.6; }
+    90%  { opacity: 0.2; }
+    100% { transform: translateY(-110vh) scale(1.1); opacity:0; }
+  }
+
+  /* ---- Washing Machine ---- */
+  .washer-wrap {
+    position: relative;
+    width: 200px;
+    height: 220px;
+    margin-bottom: 36px;
+    flex-shrink: 0;
+  }
+
+  .washer-body {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(145deg, #FFFFFF, #E0F7FA);
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(13,71,161,0.18), inset 0 2px 8px rgba(255,255,255,0.8);
+    border: 3px solid rgba(79,195,247,0.4);
+  }
+
+  /* Control panel strip */
+  .washer-panel {
+    position: absolute;
+    top: 14px; left: 18px; right: 18px;
+    height: 28px;
+    background: linear-gradient(90deg, #4FC3F7, #81D4FA);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    gap: 8px;
+  }
+  .panel-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.7);
+    flex-shrink: 0;
+  }
+  .panel-bar {
+    flex: 1;
+    height: 5px;
+    background: rgba(255,255,255,0.5);
+    border-radius: 3px;
+  }
+
+  /* Drum porthole */
+  .washer-drum-outer {
+    position: absolute;
+    top: 56px; left: 50%;
+    transform: translateX(-50%);
+    width: 118px;
+    height: 118px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0D47A1 0%, #1565C0 40%, #1976D2 100%);
+    box-shadow: 0 4px 16px rgba(13,71,161,0.35), inset 0 -3px 10px rgba(0,0,0,0.2);
+    border: 4px solid #4FC3F7;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .washer-drum-inner {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1565C0, #0D47A1);
+    position: relative;
+    animation: spinDrum 3s linear infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @keyframes spinDrum {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+
+  /* Drum holes */
+  .drum-hole {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    border: 1.5px solid rgba(255,255,255,0.25);
+  }
+  .drum-hole:nth-child(1) { top: 10px; left: 42px; }
+  .drum-hole:nth-child(2) { top: 42px; left: 10px; }
+  .drum-hole:nth-child(3) { top: 42px; right: 10px; }
+  .drum-hole:nth-child(4) { bottom: 10px; left: 42px; }
+  .drum-hole:nth-child(5) { top: 22px; left: 20px; }
+  .drum-hole:nth-child(6) { top: 22px; right: 20px; }
+  .drum-hole:nth-child(7) { bottom: 22px; left: 20px; }
+  .drum-hole:nth-child(8) { bottom: 22px; right: 20px; }
+
+  /* Clothes inside drum */
+  .drum-clothes {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  .cloth {
+    position: absolute;
+    border-radius: 40%;
+    opacity: 0.55;
+  }
+  .cloth-1 { width:50px; height:22px; background:#FFFFFF; top:18px; left:10px; transform: rotate(-20deg); }
+  .cloth-2 { width:40px; height:18px; background:#B3E5FC; bottom:16px; right:8px; transform: rotate(30deg); }
+  .cloth-3 { width:30px; height:14px; background:#E0F7FA; top:40px; right:10px; transform: rotate(-10deg); }
+
+  /* Drum water shimmer */
+  .drum-water {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 38px;
+    background: linear-gradient(180deg, rgba(79,195,247,0.25), rgba(79,195,247,0.5));
+    border-radius: 0 0 50% 50%;
+    animation: waterSlosh 2.5s ease-in-out infinite alternate;
+  }
+  @keyframes waterSlosh {
+    from { height: 32px; }
+    to   { height: 44px; }
+  }
+
+  /* Door handle */
+  .washer-handle {
+    position: absolute;
+    bottom: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 52px;
+    height: 10px;
+    background: linear-gradient(90deg, #4FC3F7, #81D4FA);
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(13,71,161,0.2);
+  }
+
+  /* Floating soap bubbles from machine */
+  .bubble {
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.7);
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(79,195,247,0.3));
+    animation: floatUp ease-in infinite;
+    pointer-events: none;
+  }
+  .bubble:nth-child(1) { width:14px; height:14px; left:40%;  animation-duration:3.0s; animation-delay:0.0s; bottom:20px; }
+  .bubble:nth-child(2) { width:10px; height:10px; left:55%;  animation-duration:2.5s; animation-delay:0.8s; bottom:20px; }
+  .bubble:nth-child(3) { width:18px; height:18px; left:30%;  animation-duration:3.5s; animation-delay:1.4s; bottom:20px; }
+  .bubble:nth-child(4) { width:8px;  height:8px;  left:65%;  animation-duration:2.8s; animation-delay:0.4s; bottom:20px; }
+  .bubble:nth-child(5) { width:12px; height:12px; left:50%;  animation-duration:3.2s; animation-delay:2.0s; bottom:20px; }
+  .bubble:nth-child(6) { width:16px; height:16px; left:20%;  animation-duration:4.0s; animation-delay:1.0s; bottom:20px; }
+
+  @keyframes floatUp {
+    0%   { transform: translateY(0) translateX(0) scale(1);   opacity:0; }
+    15%  { opacity: 0.9; }
+    80%  { opacity: 0.5; }
+    100% { transform: translateY(-180px) translateX(20px) scale(0.4); opacity:0; }
+  }
+
+  /* Hero text */
+  .hero-content { position: relative; z-index: 2; }
+
+  .hero-headline {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(2.4rem, 8vw, 4rem);
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1.15;
+    margin-bottom: 12px;
+    letter-spacing: -1px;
+  }
+  .hero-headline span { color: var(--navy-light); }
+
+  .hero-sub {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(1rem, 3.5vw, 1.25rem);
+    color: var(--navy-light);
+    font-weight: 500;
+    margin-bottom: 36px;
+    opacity: 0.85;
+  }
+
+  .hero-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 30px;
+    border-radius: 50px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    cursor: pointer;
+    border: none;
+    white-space: nowrap;
+  }
+  .btn-primary {
+    background: var(--navy);
+    color: var(--white);
+    box-shadow: 0 6px 20px rgba(13,71,161,0.30);
+  }
+  .btn-primary:hover { background: var(--navy-light); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(13,71,161,0.35); }
+
+  .btn-secondary {
+    background: var(--white);
+    color: var(--navy);
+    box-shadow: 0 4px 16px rgba(13,71,161,0.12);
+    border: 2px solid rgba(79,195,247,0.5);
+  }
+  .btn-secondary:hover { background: var(--aqua); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(13,71,161,0.15); }
+
+  /* Scroll arrow */
+  .scroll-hint {
+    position: absolute;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    opacity: 0.55;
+    animation: bounce 2s ease-in-out infinite;
+    color: var(--navy);
+    font-size: 0.75rem;
+    font-family: 'Inter', sans-serif;
+    text-decoration: none;
+    z-index: 2;
+  }
+  .scroll-hint svg { width: 24px; height: 24px; fill: none; stroke: var(--navy); stroke-width: 2
