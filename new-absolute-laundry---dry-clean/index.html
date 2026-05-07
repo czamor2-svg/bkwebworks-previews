@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ $json.name }} – Fresh. Fast. Easy.</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --sky: #4FC3F7;
+    --aqua: #E0F7FA;
+    --aqua-mid: #B2EBF2;
+    --navy: #0D47A1;
+    --navy-light: #1565C0;
+    --white: #FFFFFF;
+    --text: #1a2e4a;
+    --text-light: #4a6080;
+    --shadow: 0 8px 32px rgba(79,195,247,0.18);
+    --shadow-card: 0 4px 24px rgba(13,71,161,0.10);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+    background: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ─── HERO ─────────────────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, #e0f7fa 0%, #b2ebf2 40%, #4FC3F7 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1.5rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* floating background bubbles */
+  .hero-bg-bubble {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    animation: floatUp linear infinite;
+    pointer-events: none;
+  }
+  .hero-bg-bubble:nth-child(1)  { width:60px;  height:60px;  left:8%;   animation-duration:9s;  animation-delay:0s;   bottom:-80px; }
+  .hero-bg-bubble:nth-child(2)  { width:30px;  height:30px;  left:20%;  animation-duration:7s;  animation-delay:1s;   bottom:-50px; }
+  .hero-bg-bubble:nth-child(3)  { width:80px;  height:80px;  left:35%;  animation-duration:11s; animation-delay:2s;   bottom:-100px;}
+  .hero-bg-bubble:nth-child(4)  { width:20px;  height:20px;  left:55%;  animation-duration:8s;  animation-delay:0.5s; bottom:-40px; }
+  .hero-bg-bubble:nth-child(5)  { width:50px;  height:50px;  left:70%;  animation-duration:10s; animation-delay:3s;   bottom:-70px; }
+  .hero-bg-bubble:nth-child(6)  { width:35px;  height:35px;  left:85%;  animation-duration:6s;  animation-delay:1.5s; bottom:-60px; }
+  .hero-bg-bubble:nth-child(7)  { width:90px;  height:90px;  left:92%;  animation-duration:13s; animation-delay:0s;   bottom:-110px;}
+  .hero-bg-bubble:nth-child(8)  { width:25px;  height:25px;  left:3%;   animation-duration:8s;  animation-delay:4s;   bottom:-45px; }
+
+  @keyframes floatUp {
+    0%   { transform: translateY(0) scale(1);   opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 0.6; }
+    100% { transform: translateY(-110vh) scale(0.8); opacity: 0; }
+  }
+
+  /* ─── WASHING MACHINE ─────────────────────────────── */
+  .machine-wrap {
+    position: relative;
+    width: 200px;
+    height: 230px;
+    margin-bottom: 2rem;
+    filter: drop-shadow(0 12px 30px rgba(13,71,161,0.20));
+  }
+
+  /* machine body */
+  .machine-body {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 200px; height: 210px;
+    background: linear-gradient(145deg, #ffffff 60%, #e3f2fd 100%);
+    border-radius: 18px;
+    border: 3px solid #90CAF9;
+  }
+
+  /* top lid area */
+  .machine-top {
+    position: absolute;
+    top: 0; left: 0;
+    width: 200px; height: 48px;
+    background: linear-gradient(90deg, #4FC3F7 0%, #29B6F6 100%);
+    border-radius: 18px 18px 0 0;
+    border-bottom: 3px solid #90CAF9;
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    gap: 8px;
+  }
+  .indicator { width:10px; height:10px; border-radius:50%; }
+  .ind-green  { background:#69F0AE; box-shadow:0 0 6px #69F0AE; }
+  .ind-yellow { background:#FFE082; }
+  .ind-red    { background:#EF9A9A; }
+
+  /* porthole ring */
+  .porthole-outer {
+    position: absolute;
+    top: 62px; left: 50%;
+    transform: translateX(-50%);
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #90CAF9 0%, #4FC3F7 100%);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 16px rgba(79,195,247,0.4), inset 0 2px 6px rgba(255,255,255,0.5);
+  }
+  .porthole-glass {
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1565C0 0%, #1976D2 60%, #42A5F5 100%);
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset 0 4px 12px rgba(0,0,0,0.25), inset 0 -2px 8px rgba(255,255,255,0.15);
+  }
+
+  /* spinning drum */
+  .drum {
+    position: absolute;
+    inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    animation: spinDrum 2.5s linear infinite;
+  }
+  @keyframes spinDrum {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  .drum-inner {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    border: 3px dashed rgba(255,255,255,0.3);
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .drum-hole {
+    position: absolute;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.18);
+    border: 1.5px solid rgba(255,255,255,0.35);
+  }
+  .drum-hole:nth-child(1) { top:4px;  left:50%; transform:translateX(-50%); }
+  .drum-hole:nth-child(2) { bottom:4px; left:50%; transform:translateX(-50%); }
+  .drum-hole:nth-child(3) { left:4px;  top:50%; transform:translateY(-50%); }
+  .drum-hole:nth-child(4) { right:4px; top:50%; transform:translateY(-50%); }
+  .drum-center {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    border: 2px solid rgba(255,255,255,0.5);
+  }
+
+  /* clothes shapes tumbling */
+  .clothes-layer {
+    position: absolute;
+    inset: 0;
+    animation: spinDrum 2.5s linear infinite;
+  }
+  .cloth {
+    position: absolute;
+    border-radius: 6px;
+    opacity: 0.75;
+  }
+  .cloth-1 { width:28px; height:18px; background:#FFE082; top:15px; left:18px; transform:rotate(20deg); border-radius:8px; }
+  .cloth-2 { width:22px; height:14px; background:#F48FB1; bottom:14px; right:16px; transform:rotate(-15deg); border-radius:6px; }
+  .cloth-3 { width:18px; height:22px; background:#A5D6A7; top:30px; right:18px; transform:rotate(40deg); border-radius:6px; }
+
+  /* water swoosh */
+  .water-swoosh {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 35px;
+    background: linear-gradient(to top, rgba(79,195,247,0.5) 0%, transparent 100%);
+    border-radius: 0 0 50px 50px;
+    animation: waterSlosh 1.8s ease-in-out infinite alternate;
+  }
+  @keyframes waterSlosh {
+    from { transform: scaleX(1) translateX(0); opacity:0.5; }
+    to   { transform: scaleX(1.05) translateX(2px); opacity:0.8; }
+  }
+
+  /* machine bottom detail */
+  .machine-bottom {
+    position: absolute;
+    bottom: 10px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 10px;
+  }
+  .dial {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: linear-gradient(135deg, #90CAF9, #4FC3F7);
+    border: 2px solid #29B6F6;
+    box-shadow: 0 2px 6px rgba(79,195,247,0.3);
+  }
+  .dial-slot {
+    width: 36px; height: 22px; border-radius: 11px;
+    background: #E3F2FD;
+    border: 2px solid #90CAF9;
+  }
+
+  /* floating bubbles near machine */
+  .bubble {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.6);
+    border: 1.5px solid rgba(255,255,255,0.9);
+    animation: riseUp ease-in infinite;
+    pointer-events: none;
+  }
+  .bubble:nth-child(1){ width:14px; height:14px; left:220px; top:160px; animation-duration:3.2s; animation-delay:0s; }
+  .bubble:nth-child(2){ width:8px;  height:8px;  left:240px; top:180px; animation-duration:2.8s; animation-delay:0.6s; }
+  .bubble:nth-child(3){ width:18px; height:18px; left:-30px; top:170px; animation-duration:3.8s; animation-delay:1s; }
+  .bubble:nth-child(4){ width:10px; height:10px; left:210px; top:200px; animation-duration:2.5s; animation-delay:1.8s; }
+  .bubble:nth-child(5){ width:6px;  height:6px;  left:-20px; top:190px; animation-duration:3s;   animation-delay:0.3s; }
+
+  @keyframes riseUp {
+    0%   { transform: translateY(0) scale(1);   opacity:0; }
+    15%  { opacity: 0.9; }
+    80%  { opacity: 0.4; }
+    100% { transform: translateY(-140px) scale(0.5); opacity:0; }
+  }
+
+  /* ─── HERO TEXT ───────────────────────────────────── */
+  .hero-content { text-align: center; z-index: 2; position: relative; }
+
+  .hero-headline {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(2.4rem, 8vw, 4.2rem);
+    font-weight: 900;
+    color: var(--navy);
+    line-height: 1.1;
+    letter-spacing: -1px;
+    text-shadow: 0 2px 12px rgba(255,255,255,0.6);
+    margin-bottom: 0.6rem;
+  }
+  .hero-headline span { color: var(--navy-light); }
+
+  .hero-sub {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(1rem, 3.5vw, 1.25rem);
+    font-weight: 500;
+    color: var(--navy);
+    opacity: 0.8;
+    margin-bottom: 2.2rem;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.9rem 2rem;
+    border-radius: 50px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: none;
+  }
+  .btn:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(13,71,161,0.25); }
+  .btn:active { transform: translateY(0); }
+
+  .btn-primary {
+    background: var(--navy);
+    color: var(--white);
+    box-shadow: 0 6px 20px rgba(13,71,161,0.30);
+  }
+  .btn-secondary {
+    background: var(--white);
+    color: var(--navy);
+    box-shadow: 0 6px 20px rgba(79,195,247,0.35);
+    border: 2px solid rgba(79,195,247,0.4);
+  }
+
+  /* scroll hint */
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
