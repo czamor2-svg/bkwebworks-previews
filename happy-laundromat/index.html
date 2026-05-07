@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ $json.name }} – Fresh. Fast. Easy.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sky: #4FC3F7;
+      --white: #FFFFFF;
+      --aqua: #E0F7FA;
+      --aqua-mid: #B2EBF2;
+      --navy: #0D47A1;
+      --navy-light: #1565C0;
+      --text: #1A2E4A;
+      --subtle: #607D8B;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3 { font-family: 'Poppins', sans-serif; }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(160deg, #E0F7FA 0%, #B2EBF2 40%, #81D4FA 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    /* Background decorative circles */
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      background: rgba(255,255,255,0.18);
+      border-radius: 50%;
+      top: -150px; right: -150px;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 400px; height: 400px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 50%;
+      bottom: -100px; left: -100px;
+    }
+
+    /* ── Washing Machine ── */
+    .washer-wrap {
+      position: relative;
+      width: 180px;
+      height: 200px;
+      margin-bottom: 2rem;
+      flex-shrink: 0;
+    }
+
+    .washer-body {
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 160px; height: 175px;
+      background: linear-gradient(145deg, #FFFFFF, #E3F2FD);
+      border-radius: 18px;
+      box-shadow: 0 12px 40px rgba(13,71,161,0.18), inset 0 2px 4px rgba(255,255,255,0.9);
+      border: 3px solid rgba(79,195,247,0.4);
+    }
+
+    /* Control panel top strip */
+    .washer-panel {
+      position: absolute;
+      top: 12px; left: 12px; right: 12px;
+      height: 28px;
+      background: linear-gradient(90deg, #4FC3F7, #29B6F6);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 8px;
+      gap: 5px;
+    }
+    .panel-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.7);
+    }
+    .panel-dot.big { width: 12px; height: 12px; background: #fff; }
+
+    /* Drum porthole */
+    .drum-ring {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #1565C0, #0D47A1);
+      box-shadow: 0 4px 18px rgba(13,71,161,0.45), inset 0 0 0 4px rgba(79,195,247,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .drum-inner {
+      width: 84px; height: 84px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #0277BD, #01579B);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Spinning drum graphic */
+    .drum-spinner {
+      width: 70px; height: 70px;
+      border-radius: 50%;
+      background: conic-gradient(
+        rgba(255,255,255,0.15) 0deg,
+        transparent 60deg,
+        rgba(255,255,255,0.08) 120deg,
+        transparent 180deg,
+        rgba(255,255,255,0.15) 240deg,
+        transparent 300deg,
+        rgba(255,255,255,0.08) 360deg
+      );
+      animation: spinDrum 2.5s linear infinite;
+      position: relative;
+    }
+
+    .drum-spinner::before {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.25), transparent 60%);
+      border: 2px dashed rgba(255,255,255,0.2);
+    }
+
+    /* Clothes shapes inside drum */
+    .drum-clothes {
+      position: absolute;
+      width: 100%; height: 100%;
+      animation: spinDrum 2.5s linear infinite;
+    }
+    .cloth {
+      position: absolute;
+      background: rgba(255,255,255,0.3);
+      border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    }
+    .cloth-1 { width: 22px; height: 16px; top: 14px; left: 18px; transform: rotate(20deg); }
+    .cloth-2 { width: 18px; height: 12px; bottom: 12px; right: 14px; transform: rotate(-30deg); background: rgba(255,255,255,0.2); }
+    .cloth-3 { width: 14px; height: 10px; bottom: 20px; left: 16px; transform: rotate(10deg); }
+
+    @keyframes spinDrum {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    /* Door handle */
+    .drum-handle {
+      position: absolute;
+      right: -2px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 10px; height: 30px;
+      background: #90CAF9;
+      border-radius: 0 6px 6px 0;
+    }
+
+    /* Bubbles */
+    .bubbles-container {
+      position: absolute;
+      bottom: 170px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 120px;
+      pointer-events: none;
+    }
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.65);
+      box-shadow: inset 0 -2px 4px rgba(79,195,247,0.4), 0 2px 8px rgba(255,255,255,0.5);
+      animation: floatUp linear infinite;
+      bottom: 0;
+    }
+    .bubble:nth-child(1)  { width:14px; height:14px; left:20px;  animation-duration:3.2s; animation-delay:0s; }
+    .bubble:nth-child(2)  { width:9px;  height:9px;  left:50px;  animation-duration:2.6s; animation-delay:0.8s; }
+    .bubble:nth-child(3)  { width:12px; height:12px; left:85px;  animation-duration:3.8s; animation-delay:0.3s; }
+    .bubble:nth-child(4)  { width:7px;  height:7px;  left:115px; animation-duration:2.9s; animation-delay:1.2s; }
+    .bubble:nth-child(5)  { width:16px; height:16px; left:145px; animation-duration:4.1s; animation-delay:0.6s; }
+    .bubble:nth-child(6)  { width:8px;  height:8px;  left:35px;  animation-duration:3.0s; animation-delay:1.8s; }
+    .bubble:nth-child(7)  { width:11px; height:11px; left:100px; animation-duration:3.5s; animation-delay:2.2s; }
+    .bubble:nth-child(8)  { width:6px;  height:6px;  left:70px;  animation-duration:2.4s; animation-delay:1.5s; }
+
+    @keyframes floatUp {
+      0%   { transform: translateY(0) scale(1);   opacity: 0; }
+      10%  { opacity: 0.8; }
+      85%  { opacity: 0.6; }
+      100% { transform: translateY(-110px) scale(1.1); opacity: 0; }
+    }
+
+    /* Steam lines */
+    .steam {
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+    }
+    .steam-line {
+      width: 3px;
+      height: 20px;
+      background: linear-gradient(to top, rgba(255,255,255,0.5), transparent);
+      border-radius: 2px;
+      animation: steamRise 2s ease-in-out infinite;
+    }
+    .steam-line:nth-child(2) { animation-delay: 0.4s; height: 15px; }
+    .steam-line:nth-child(3) { animation-delay: 0.8s; }
+
+    @keyframes steamRise {
+      0%   { transform: translateY(0) scaleX(1);   opacity: 0; }
+      30%  { opacity: 0.7; }
+      100% { transform: translateY(-18px) scaleX(0.5); opacity: 0; }
+    }
+
+    /* Hero text */
+    .hero-content { position: relative; z-index: 2; }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.55);
+      color: var(--navy);
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      border-radius: 99px;
+      margin-bottom: 1rem;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(79,195,247,0.4);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 7vw, 3.8rem);
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.1;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, #0D47A1, #4FC3F7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 3vw, 1.2rem);
+      color: var(--navy-light);
+      font-weight: 500;
+      margin-bottom: 2rem;
+      opacity: 0.85;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.9rem 2rem;
+      border-radius: 50px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+      border: none;
+      white-space: nowrap;
+    }
+    .btn:active { transform: scale(0.97); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #0D47A1, #1976D2);
+      color: #fff;
+      box-shadow: 0 6px 24px rgba(13,71,161,0.35);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(13,71,161,0.42); }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.85);
+      color: var(--navy);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      backdrop-filter: blur(6px);
+      border: 2px solid rgba(79,195,247,0.5);
+    }
+    .btn-secondary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(79,195,247,0.35); }
+
+    /* Scroll indicator */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+      opacity: 0.55;
+      color: var(--navy);
+      font-size: 0.75rem;
+      font-weight: 500;
+      animation: bobUp 1.8s ease-in-out infinite;
+    }
+    .scroll-arrow {
+      width: 20px; height: 20px;
+      border-right: 2.5px solid var(--navy);
+      border-bottom: 2.5px solid var(--navy);
+      transform: rotate(45deg);
+    }
+    @keyframes bobUp {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ─── SHARED SECTION STYLES ───
