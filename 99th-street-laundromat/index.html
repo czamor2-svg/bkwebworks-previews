@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ $json.name }} – Fresh. Fast. Easy.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sky: #4FC3F7;
+      --sky-dark: #0288D1;
+      --aqua: #E0F7FA;
+      --aqua-mid: #B2EBF2;
+      --navy: #0D47A1;
+      --navy-light: #1565C0;
+      --white: #FFFFFF;
+      --text-dark: #0D47A1;
+      --text-body: #2C3E50;
+      --shadow: 0 8px 32px rgba(79,195,247,0.18);
+      --radius: 20px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--text-body);
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; color: var(--navy); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(160deg, #E0F7FA 0%, #B2EBF2 40%, #81D4FA 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 24px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* floating background blobs */
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(255,255,255,0.55) 0%, transparent 70%);
+      top: -120px; left: -120px;
+      border-radius: 50%;
+      animation: blobFloat 8s ease-in-out infinite alternate;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 380px; height: 380px;
+      background: radial-gradient(circle, rgba(79,195,247,0.25) 0%, transparent 70%);
+      bottom: -80px; right: -80px;
+      border-radius: 50%;
+      animation: blobFloat 10s ease-in-out infinite alternate-reverse;
+    }
+    @keyframes blobFloat {
+      from { transform: translateY(0) scale(1); }
+      to   { transform: translateY(30px) scale(1.08); }
+    }
+
+    /* ── WASHING MACHINE ILLUSTRATION ── */
+    .machine-wrap {
+      position: relative;
+      width: 180px; height: 200px;
+      margin: 0 auto 36px;
+      flex-shrink: 0;
+    }
+
+    .machine-body {
+      width: 160px; height: 180px;
+      background: linear-gradient(145deg, #ffffff, #e8f6ff);
+      border-radius: 22px;
+      position: absolute;
+      left: 10px; top: 10px;
+      box-shadow: 0 12px 40px rgba(2,136,209,0.22), inset 0 2px 6px rgba(255,255,255,0.8);
+      border: 3px solid rgba(79,195,247,0.4);
+    }
+
+    /* top panel */
+    .machine-panel {
+      width: 140px;
+      height: 28px;
+      background: linear-gradient(90deg, #81D4FA, #4FC3F7);
+      border-radius: 12px 12px 0 0;
+      position: absolute;
+      left: 20px; top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 14px;
+      gap: 6px;
+    }
+    .panel-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--white);
+      opacity: 0.85;
+    }
+    .panel-dot.green { background: #A5D6A7; }
+    .panel-dot.yellow { background: #FFF59D; }
+
+    /* drum */
+    .drum-outer {
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #E1F5FE, #B3E5FC);
+      border: 6px solid rgba(79,195,247,0.5);
+      position: absolute;
+      left: 40px; top: 52px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 18px rgba(2,136,209,0.18), inset 0 2px 8px rgba(255,255,255,0.6);
+      overflow: hidden;
+    }
+    .drum-inner {
+      width: 78px; height: 78px;
+      border-radius: 50%;
+      background: conic-gradient(
+        rgba(79,195,247,0.15) 0deg,
+        rgba(255,255,255,0.7) 60deg,
+        rgba(79,195,247,0.25) 120deg,
+        rgba(255,255,255,0.5) 180deg,
+        rgba(129,212,250,0.3) 240deg,
+        rgba(255,255,255,0.6) 300deg,
+        rgba(79,195,247,0.15) 360deg
+      );
+      animation: spin 3s linear infinite;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .drum-inner::after {
+      content: '';
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.9);
+      box-shadow: 0 2px 8px rgba(2,136,209,0.2);
+    }
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    /* clothes tumbling */
+    .drum-clothes {
+      position: absolute;
+      width: 78px; height: 78px;
+      border-radius: 50%;
+      animation: spin 3s linear infinite;
+      pointer-events: none;
+    }
+    .cloth {
+      position: absolute;
+      border-radius: 50% 50% 40% 40%;
+    }
+    .cloth-1 {
+      width: 24px; height: 14px;
+      background: rgba(255,255,255,0.85);
+      top: 10px; left: 12px;
+      transform: rotate(-20deg);
+    }
+    .cloth-2 {
+      width: 18px; height: 10px;
+      background: rgba(225,245,254,0.9);
+      bottom: 14px; right: 8px;
+      transform: rotate(30deg);
+    }
+    .cloth-3 {
+      width: 20px; height: 12px;
+      background: rgba(255,255,255,0.75);
+      bottom: 20px; left: 14px;
+      transform: rotate(-10deg);
+    }
+
+    /* porthole ring */
+    .drum-ring {
+      position: absolute;
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      border: 3px dashed rgba(79,195,247,0.35);
+      left: 40px; top: 52px;
+      animation: spin 12s linear infinite reverse;
+    }
+
+    /* machine bottom details */
+    .machine-bottom {
+      position: absolute;
+      bottom: 18px; left: 30px;
+      display: flex; gap: 8px;
+    }
+    .m-btn {
+      width: 24px; height: 10px;
+      border-radius: 6px;
+      background: linear-gradient(90deg, #81D4FA, #4FC3F7);
+    }
+    .m-btn:nth-child(2) { width: 16px; background: linear-gradient(90deg, #B2EBF2, #80DEEA); }
+
+    /* legs */
+    .machine-leg {
+      width: 12px; height: 10px;
+      background: #B0BEC5;
+      border-radius: 0 0 4px 4px;
+      position: absolute;
+      bottom: 0;
+    }
+    .machine-leg.left { left: 38px; }
+    .machine-leg.right { right: 38px; }
+
+    /* ── BUBBLES ── */
+    .bubbles { position: absolute; width: 100%; height: 100%; top: 0; left: 0; pointer-events: none; z-index: 0; }
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.9), rgba(79,195,247,0.3));
+      border: 1.5px solid rgba(255,255,255,0.7);
+      animation: floatUp linear infinite;
+      bottom: -40px;
+    }
+    .bubble:nth-child(1)  { width:14px;height:14px; left:8%;  animation-duration:6s;  animation-delay:0s;   }
+    .bubble:nth-child(2)  { width:22px;height:22px; left:18%; animation-duration:8s;  animation-delay:1s;   }
+    .bubble:nth-child(3)  { width:10px;height:10px; left:28%; animation-duration:5s;  animation-delay:2s;   }
+    .bubble:nth-child(4)  { width:18px;height:18px; left:42%; animation-duration:7s;  animation-delay:0.5s; }
+    .bubble:nth-child(5)  { width:12px;height:12px; left:55%; animation-duration:6.5s;animation-delay:3s;   }
+    .bubble:nth-child(6)  { width:26px;height:26px; left:65%; animation-duration:9s;  animation-delay:1.5s; }
+    .bubble:nth-child(7)  { width:16px;height:16px; left:75%; animation-duration:7.5s;animation-delay:2.5s; }
+    .bubble:nth-child(8)  { width:20px;height:20px; left:85%; animation-duration:8.5s;animation-delay:0.8s; }
+    .bubble:nth-child(9)  { width:9px; height:9px;  left:92%; animation-duration:5.5s;animation-delay:4s;   }
+    .bubble:nth-child(10) { width:15px;height:15px; left:35%; animation-duration:7s;  animation-delay:3.5s; }
+    @keyframes floatUp {
+      0%   { transform: translateY(0) scale(1);    opacity: 0; }
+      10%  { opacity: 0.8; }
+      90%  { opacity: 0.4; }
+      100% { transform: translateY(-110vh) scale(0.6); opacity: 0; }
+    }
+
+    /* ── HERO TEXT ── */
+    .hero-content { position: relative; z-index: 2; max-width: 600px; }
+
+    .hero-eyebrow {
+      display: inline-block;
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(8px);
+      color: var(--navy);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 100px;
+      margin-bottom: 18px;
+      border: 1px solid rgba(79,195,247,0.4);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 8vw, 4.2rem);
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--navy);
+      margin-bottom: 16px;
+      text-shadow: 0 2px 20px rgba(255,255,255,0.5);
+    }
+    .hero h1 span { color: var(--sky-dark); }
+
+    .hero-sub {
+      font-size: clamp(1rem, 3vw, 1.2rem);
+      color: var(--navy-light);
+      margin-bottom: 36px;
+      font-weight: 500;
+      opacity: 0.9;
+    }
+
+    .cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 32px;
+      border-radius: 100px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+      border: none;
+    }
+    .btn:hover { transform: translateY(-3px); }
+    .btn:active { transform: translateY(0); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--navy), var(--navy-light));
+      color: var(--white);
+      box-shadow: 0 8px 28px rgba(13,71,161,0.35);
+    }
+    .btn-primary:hover { box-shadow: 0 14px 36px rgba(13,71,161,0.45); }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(10px);
+      color: var(--navy);
+      box-shadow: 0 8px 28px rgba(79,195,247,0.3);
+      border: 2px solid rgba(79,195,247,0.5);
+    }
+    .btn-secondary:hover { background: var(--white); box-shadow: 0 14px 36px rgba(79,195,247,0.4); }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: var(--navy-light);
+      font-size: 0.75
