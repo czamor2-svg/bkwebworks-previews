@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ $json.name }} – Fresh. Fast. Easy.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sky: #4FC3F7;
+      --sky-dark: #0288D1;
+      --aqua: #E0F7FA;
+      --aqua-mid: #B2EBF2;
+      --navy: #0D47A1;
+      --navy-light: #1565C0;
+      --white: #FFFFFF;
+      --text: #1A2A4A;
+      --text-light: #4A6080;
+      --shadow: 0 8px 32px rgba(13,71,161,0.10);
+      --shadow-sm: 0 2px 12px rgba(13,71,161,0.08);
+      --radius: 20px;
+      --radius-sm: 12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ─── HERO ─────────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      background: linear-gradient(160deg, #E0F7FA 0%, #B2EBF2 40%, #81D4FA 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 24px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Background floating circles for atmosphere */
+    #hero::before {
+      content: '';
+      position: absolute;
+      top: -120px; right: -120px;
+      width: 420px; height: 420px;
+      background: rgba(79,195,247,0.18);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    #hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -80px;
+      width: 320px; height: 320px;
+      background: rgba(255,255,255,0.22);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    /* ── WASHING MACHINE ── */
+    .washer-scene {
+      position: relative;
+      width: 180px;
+      height: 200px;
+      margin: 0 auto 36px;
+      filter: drop-shadow(0 12px 28px rgba(13,71,161,0.18));
+    }
+
+    /* Body of machine */
+    .washer-body {
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 180px; height: 190px;
+      background: linear-gradient(160deg, #FFFFFF 0%, #E3F2FD 100%);
+      border-radius: 22px 22px 16px 16px;
+      border: 3px solid rgba(79,195,247,0.6);
+    }
+
+    /* Top panel */
+    .washer-top {
+      position: absolute;
+      top: 0; left: 4px;
+      width: 168px; height: 36px;
+      background: linear-gradient(90deg, #4FC3F7, #0288D1);
+      border-radius: 18px 18px 0 0;
+    }
+
+    /* Control dots on top */
+    .washer-top::before {
+      content: '';
+      position: absolute;
+      right: 14px; top: 50%; transform: translateY(-50%);
+      width: 10px; height: 10px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: -18px 0 0 #81D4FA, -32px 0 0 #B2EBF2;
+    }
+
+    /* Door frame */
+    .washer-door-frame {
+      position: absolute;
+      top: 46px; left: 50%;
+      transform: translateX(-50%);
+      width: 116px; height: 116px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0288D1, #4FC3F7);
+      display: flex; align-items: center; justify-content: center;
+      border: 3px solid rgba(2,136,209,0.5);
+    }
+
+    /* Door glass */
+    .washer-door {
+      width: 96px; height: 96px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #E0F7FA 0%, #B2EBF2 50%, #4FC3F7 100%);
+      border: 2px solid rgba(255,255,255,0.6);
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Spinning drum lines */
+    .drum {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      border: 3px dashed rgba(2,136,209,0.4);
+      animation: spin 2.5s linear infinite;
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .drum::before {
+      content: '';
+      position: absolute;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.7);
+      border: 2px solid rgba(79,195,247,0.5);
+    }
+
+    /* Clothes shapes inside drum */
+    .drum::after {
+      content: '';
+      position: absolute;
+      top: 10px; left: 14px;
+      width: 20px; height: 12px;
+      background: rgba(255,255,255,0.8);
+      border-radius: 6px;
+      box-shadow: 18px 22px 0 -2px rgba(224,247,250,0.9),
+                  -4px 30px 0 -2px rgba(255,255,255,0.7);
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    /* Door glare */
+    .washer-door::after {
+      content: '';
+      position: absolute;
+      top: 8px; left: 10px;
+      width: 22px; height: 14px;
+      background: rgba(255,255,255,0.45);
+      border-radius: 50%;
+      transform: rotate(-30deg);
+    }
+
+    /* Bottom panel */
+    .washer-bottom {
+      position: absolute;
+      bottom: 6px; left: 14px;
+      width: 60px; height: 10px;
+      background: rgba(79,195,247,0.3);
+      border-radius: 5px;
+    }
+    .washer-bottom::after {
+      content: '';
+      position: absolute;
+      left: 70px; top: 0;
+      width: 36px; height: 10px;
+      background: rgba(79,195,247,0.2);
+      border-radius: 5px;
+    }
+
+    /* Legs */
+    .washer-leg {
+      position: absolute;
+      bottom: -12px;
+      width: 16px; height: 14px;
+      background: #B2EBF2;
+      border-radius: 0 0 6px 6px;
+    }
+    .washer-leg.left { left: 24px; }
+    .washer-leg.right { right: 24px; }
+
+    /* ── BUBBLES ── */
+    .bubbles {
+      position: absolute;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 220px; height: 340px;
+      pointer-events: none;
+    }
+
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.55);
+      border: 1.5px solid rgba(79,195,247,0.4);
+      animation: floatUp linear infinite;
+      bottom: 0;
+    }
+
+    .bubble:nth-child(1)  { width:12px; height:12px; left:20%;  animation-duration:3.2s; animation-delay:0s;    }
+    .bubble:nth-child(2)  { width:8px;  height:8px;  left:35%;  animation-duration:2.7s; animation-delay:0.5s;  }
+    .bubble:nth-child(3)  { width:16px; height:16px; left:50%;  animation-duration:3.8s; animation-delay:1s;    }
+    .bubble:nth-child(4)  { width:10px; height:10px; left:65%;  animation-duration:2.9s; animation-delay:0.3s;  }
+    .bubble:nth-child(5)  { width:7px;  height:7px;  left:75%;  animation-duration:3.5s; animation-delay:1.4s;  }
+    .bubble:nth-child(6)  { width:14px; height:14px; left:12%;  animation-duration:4.0s; animation-delay:0.8s;  }
+    .bubble:nth-child(7)  { width:9px;  height:9px;  left:80%;  animation-duration:3.1s; animation-delay:2.0s;  }
+    .bubble:nth-child(8)  { width:11px; height:11px; left:42%;  animation-duration:2.5s; animation-delay:1.7s;  }
+
+    @keyframes floatUp {
+      0%   { transform: translateY(0)   scale(1);   opacity: 0.8; }
+      80%  { opacity: 0.5; }
+      100% { transform: translateY(-300px) scale(0.6); opacity: 0; }
+    }
+
+    /* ── HERO TEXT ── */
+    .hero-headline {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2.6rem, 8vw, 5rem);
+      color: var(--navy);
+      line-height: 1.1;
+      letter-spacing: -1px;
+      margin-bottom: 14px;
+      position: relative; z-index: 2;
+    }
+
+    .hero-headline span {
+      color: var(--sky-dark);
+      display: block;
+    }
+
+    .hero-sub {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: clamp(1rem, 3vw, 1.25rem);
+      color: var(--navy-light);
+      margin-bottom: 8px;
+      position: relative; z-index: 2;
+    }
+
+    .hero-tagline {
+      font-size: 0.95rem;
+      color: var(--text-light);
+      margin-bottom: 40px;
+      position: relative; z-index: 2;
+    }
+
+    /* ── CTA BUTTONS ── */
+    .btn-group {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+      position: relative; z-index: 2;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 32px;
+      border-radius: 50px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:active { transform: scale(0.97); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--navy), var(--navy-light));
+      color: #fff;
+      box-shadow: 0 6px 24px rgba(13,71,161,0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(13,71,161,0.4);
+    }
+
+    .btn-secondary {
+      background: var(--white);
+      color: var(--navy);
+      box-shadow: 0 6px 24px rgba(13,71,161,0.15);
+      border: 2px solid rgba(79,195,247,0.5);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(13,71,161,0.2);
+    }
+
+    /* ── SCROLL HINT ── */
+    .scroll-hint {
+      position: absolute;
+      bottom: 28px; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column;
+      align-items: center; gap: 6px;
+      color: var(--navy-light);
+      font-size: 0.75rem;
+      font-family: 'Inter', sans-serif;
+      animation: bobDown 1.8s ease-in-out infinite;
+      z-index: 2;
+    }
+
+    .scroll-hint .chevron {
+      width: 20px; height: 20px;
+      border-right: 2.5px solid var(--navy-light);
+      border-bottom: 2.5px solid var(--navy-light);
+      transform: rotate(45deg);
+    }
+
+    @keyframes bobDown {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ─── SECTION SHARED ───────────────────────────────────────── */
+    section { padding: 72px 24px; }
+
+    .section-inner {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--sky-dark);
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.8rem, 5vw, 2.6rem);
+      color: var(--navy);
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .section-desc {
