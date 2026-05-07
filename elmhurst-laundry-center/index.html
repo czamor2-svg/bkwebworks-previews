@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ $json.name }} – Fresh. Fast. Easy.</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --sky: #4FC3F7;
+    --aqua: #E0F7FA;
+    --navy: #0D47A1;
+    --white: #FFFFFF;
+    --soft-blue: #B3E5FC;
+    --mid-blue: #29B6F6;
+    --shadow: 0 4px 24px rgba(13,71,161,0.10);
+    --radius: 20px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--navy);
+    background: var(--white);
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, #e0f7fa 0%, #b3e5fc 40%, #4FC3F7 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 24px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Floating background circles */
+  #hero::before {
+    content: '';
+    position: absolute;
+    width: 500px; height: 500px;
+    background: rgba(255,255,255,0.18);
+    border-radius: 50%;
+    top: -100px; right: -120px;
+    pointer-events: none;
+  }
+  #hero::after {
+    content: '';
+    position: absolute;
+    width: 300px; height: 300px;
+    background: rgba(255,255,255,0.13);
+    border-radius: 50%;
+    bottom: -80px; left: -80px;
+    pointer-events: none;
+  }
+
+  /* ── Washing Machine CSS Art ── */
+  .washer-wrap {
+    position: relative;
+    width: 200px;
+    height: 220px;
+    margin: 0 auto 36px;
+    filter: drop-shadow(0 12px 32px rgba(13,71,161,0.18));
+  }
+
+  .washer-body {
+    width: 180px;
+    height: 200px;
+    background: linear-gradient(145deg, #ffffff 60%, #e0f7fa 100%);
+    border-radius: 22px;
+    position: absolute;
+    left: 10px; top: 0;
+    box-shadow: 0 8px 32px rgba(13,71,161,0.15), inset 0 2px 8px rgba(255,255,255,0.9);
+    border: 3px solid rgba(79,195,247,0.4);
+  }
+
+  /* top panel strip */
+  .washer-panel {
+    position: absolute;
+    left: 20px; top: 10px;
+    width: 160px; height: 28px;
+    background: linear-gradient(90deg, #4FC3F7, #29B6F6);
+    border-radius: 10px 10px 6px 6px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 14px;
+    gap: 7px;
+  }
+  .washer-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #fff;
+    opacity: 0.85;
+  }
+  .washer-dot.big { width: 12px; height: 12px; background: #b3e5fc; opacity: 1; }
+
+  /* door / drum */
+  .washer-door {
+    position: absolute;
+    width: 110px; height: 110px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e3f2fd 30%, #b3e5fc 100%);
+    border: 5px solid #4FC3F7;
+    left: 45px; top: 50px;
+    overflow: hidden;
+    box-shadow: inset 0 4px 16px rgba(13,71,161,0.12), 0 2px 8px rgba(79,195,247,0.3);
+  }
+
+  /* inner drum ring */
+  .washer-drum {
+    position: absolute;
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    border: 3px dashed rgba(79,195,247,0.5);
+    top: 7px; left: 7px;
+    animation: spinDrum 3s linear infinite;
+  }
+
+  /* clothes inside drum */
+  .drum-clothes {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: spinDrum 3s linear infinite;
+  }
+  .cloth-blob {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.8;
+  }
+  .cloth-blob:nth-child(1) {
+    width: 36px; height: 28px;
+    background: linear-gradient(135deg, #ffffff, #e0f7fa);
+    top: 22px; left: 18px;
+    border-radius: 40% 60% 55% 45%;
+  }
+  .cloth-blob:nth-child(2) {
+    width: 28px; height: 32px;
+    background: linear-gradient(135deg, #ffffff, #b3e5fc);
+    top: 45px; left: 40px;
+    border-radius: 55% 45% 40% 60%;
+  }
+  .cloth-blob:nth-child(3) {
+    width: 24px; height: 22px;
+    background: linear-gradient(135deg, #e0f7fa, #ffffff);
+    top: 30px; left: 50px;
+    border-radius: 45% 55% 60% 40%;
+  }
+
+  @keyframes spinDrum {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+
+  /* door hinge detail */
+  .washer-hinge {
+    position: absolute;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: #4FC3F7;
+    left: 42px; top: 97px;
+    box-shadow: 0 0 0 3px #fff;
+  }
+
+  /* bottom details */
+  .washer-bottom {
+    position: absolute;
+    left: 25px; bottom: 22px;
+    width: 130px; height: 20px;
+    background: #e0f7fa;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 10px;
+  }
+  .washer-bar {
+    height: 6px; width: 30px;
+    background: linear-gradient(90deg, #4FC3F7, #29B6F6);
+    border-radius: 3px;
+  }
+  .washer-circle-sm {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: #4FC3F7;
+  }
+
+  /* ── Bubbles ── */
+  .bubble {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.9), rgba(79,195,247,0.25));
+    border: 1.5px solid rgba(255,255,255,0.7);
+    animation: floatUp linear infinite;
+    pointer-events: none;
+  }
+  .bubble:nth-child(1)  { width:14px; height:14px; left:55px;  animation-duration:4s;  animation-delay:0s;   bottom:-20px; }
+  .bubble:nth-child(2)  { width:9px;  height:9px;  left:90px;  animation-duration:3.2s; animation-delay:0.8s; bottom:-20px; }
+  .bubble:nth-child(3)  { width:18px; height:18px; left:120px; animation-duration:5s;  animation-delay:1.5s; bottom:-20px; }
+  .bubble:nth-child(4)  { width:11px; height:11px; left:70px;  animation-duration:3.8s; animation-delay:2.2s; bottom:-20px; }
+  .bubble:nth-child(5)  { width:7px;  height:7px;  left:145px; animation-duration:4.5s; animation-delay:0.4s; bottom:-20px; }
+  .bubble:nth-child(6)  { width:15px; height:15px; left:40px;  animation-duration:4.2s; animation-delay:3s;   bottom:-20px; }
+
+  /* Global floating bubbles behind hero */
+  .bg-bubble {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.22);
+    pointer-events: none;
+    animation: floatUp linear infinite;
+  }
+  .bg-bubble:nth-child(1) { width:60px; height:60px; left:5%;   animation-duration:9s;  animation-delay:0s;   bottom:0; }
+  .bg-bubble:nth-child(2) { width:40px; height:40px; left:20%;  animation-duration:11s; animation-delay:2s;   bottom:0; }
+  .bg-bubble:nth-child(3) { width:80px; height:80px; left:70%;  animation-duration:8s;  animation-delay:1s;   bottom:0; }
+  .bg-bubble:nth-child(4) { width:30px; height:30px; left:85%;  animation-duration:10s; animation-delay:3s;   bottom:0; }
+  .bg-bubble:nth-child(5) { width:50px; height:50px; left:45%;  animation-duration:13s; animation-delay:0.5s; bottom:0; }
+
+  @keyframes floatUp {
+    0%   { transform: translateY(0) scale(1); opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 0.7; }
+    100% { transform: translateY(-280px) scale(0.6); opacity: 0; }
+  }
+
+  /* ── Hero Text ── */
+  .hero-headline {
+    font-size: clamp(2.4rem, 8vw, 4.2rem);
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1.1;
+    margin-bottom: 14px;
+    text-shadow: 0 2px 16px rgba(255,255,255,0.5);
+    position: relative; z-index: 1;
+  }
+  .hero-headline span { color: var(--white); }
+
+  .hero-sub {
+    font-size: clamp(1rem, 3.5vw, 1.25rem);
+    color: var(--navy);
+    font-weight: 500;
+    opacity: 0.85;
+    margin-bottom: 36px;
+    position: relative; z-index: 1;
+  }
+
+  .cta-group {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative; z-index: 1;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 32px;
+    border-radius: 50px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    white-space: nowrap;
+  }
+  .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(13,71,161,0.22); }
+  .btn:active { transform: translateY(0); }
+
+  .btn-primary {
+    background: var(--navy);
+    color: var(--white);
+    box-shadow: 0 6px 20px rgba(13,71,161,0.28);
+  }
+  .btn-secondary {
+    background: var(--white);
+    color: var(--navy);
+    box-shadow: 0 6px 20px rgba(13,71,161,0.15);
+  }
+
+  /* scroll hint */
+  .scroll-hint {
+    position: absolute;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    opacity: 0.6;
+    animation: bounce 2s ease-in-out infinite;
+    z-index: 2;
+  }
+  .scroll-hint span {
+    font-size: 0.75rem;
+    font-family: 'Inter', sans-serif;
+    color: var(--navy);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .scroll-arrow {
+    width: 22px; height: 22px;
+    border-right: 3px solid var(--navy);
+    border-bottom: 3px solid var(--navy);
+    transform: rotate(45deg);
+    border-radius: 2px;
+  }
+  @keyframes bounce {
+    0%,100% { transform: translateX(-50%) translateY(0); }
+    50%      { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* ─── SECTION SHARED ─── */
+  section { padding: 80px 24px; }
+
+  .section-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .section-tag {
+    display: inline-block;
+    background: var(--aqua);
+    color: var(--mid-blue);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 50px;
+    margin-bottom: 14px;
+  }
+
+  .section-title {
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    font-weight: 800;
