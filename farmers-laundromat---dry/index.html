@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ $json.name }} – Fresh. Fast. Easy.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sky: #4FC3F7;
+      --aqua: #E0F7FA;
+      --aqua-mid: #B2EBF2;
+      --navy: #0D47A1;
+      --navy-light: #1565C0;
+      --white: #FFFFFF;
+      --text: #1A237E;
+      --text-soft: #455A64;
+      --shadow: 0 4px 24px rgba(13,71,161,0.10);
+      --radius: 20px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      background: linear-gradient(160deg, #E0F7FA 0%, #B2EBF2 40%, #81D4FA 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px 60px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    /* Background bubbles decoration */
+    .bg-bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+      animation: bgFloat linear infinite;
+    }
+    .bg-bubble:nth-child(1)  { width:180px; height:180px; left:-60px;  top:60%;  animation-duration:18s; }
+    .bg-bubble:nth-child(2)  { width:120px; height:120px; right:-30px; top:20%;  animation-duration:14s; animation-delay:-4s; }
+    .bg-bubble:nth-child(3)  { width: 80px; height: 80px; left:15%;   top:80%;  animation-duration:12s; animation-delay:-7s; }
+    .bg-bubble:nth-child(4)  { width:220px; height:220px; right:-80px; top:65%;  animation-duration:22s; animation-delay:-2s; }
+    .bg-bubble:nth-child(5)  { width: 60px; height: 60px; left:60%;   top:10%;  animation-duration:10s; animation-delay:-5s; }
+
+    @keyframes bgFloat {
+      0%   { transform: translateY(0) scale(1); opacity:.4; }
+      50%  { transform: translateY(-40px) scale(1.05); opacity:.6; }
+      100% { transform: translateY(0) scale(1); opacity:.4; }
+    }
+
+    /* ── WASHING MACHINE ILLUSTRATION ── */
+    .washer-wrap {
+      position: relative;
+      width: 200px;
+      height: 220px;
+      margin-bottom: 32px;
+      flex-shrink: 0;
+    }
+
+    /* Machine body */
+    .washer-body {
+      position: absolute;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 180px;
+      height: 200px;
+      background: linear-gradient(145deg, #FFFFFF 60%, #E3F2FD 100%);
+      border-radius: 22px;
+      box-shadow: 0 8px 32px rgba(13,71,161,0.18), inset 0 2px 8px rgba(255,255,255,0.8);
+    }
+
+    /* Top panel */
+    .washer-top-panel {
+      position: absolute;
+      top: 12px; left: 50%;
+      transform: translateX(-50%);
+      width: 140px;
+      height: 16px;
+      background: linear-gradient(90deg, #B2EBF2, #4FC3F7, #B2EBF2);
+      border-radius: 8px;
+    }
+
+    /* Control dots */
+    .washer-dot {
+      position: absolute;
+      top: 16px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .washer-dot:nth-child(3) { left: 26px;  background: #4FC3F7; top: 14px; }
+    .washer-dot:nth-child(4) { left: 44px;  background: #81D4FA; top: 14px; }
+    .washer-dot:nth-child(5) { right: 26px; background: var(--navy); top: 14px; width:8px; height:8px; }
+
+    /* Porthole ring */
+    .washer-ring {
+      position: absolute;
+      top: 44px; left: 50%;
+      transform: translateX(-50%);
+      width: 118px;
+      height: 118px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #90CAF9, #4FC3F7);
+      box-shadow: 0 4px 16px rgba(13,71,161,0.20), inset 0 2px 6px rgba(255,255,255,0.5);
+    }
+
+    /* Glass window */
+    .washer-glass {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 38% 35%, rgba(255,255,255,0.9) 0%, rgba(79,195,247,0.55) 60%, rgba(2,119,189,0.4) 100%);
+      overflow: hidden;
+      box-shadow: inset 0 3px 12px rgba(255,255,255,0.6);
+    }
+
+    /* Drum spinning */
+    .washer-drum {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      animation: drumSpin 2.5s linear infinite;
+    }
+
+    @keyframes drumSpin {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to   { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    .drum-spoke {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 60px;
+      height: 4px;
+      background: rgba(255,255,255,0.55);
+      border-radius: 2px;
+      transform-origin: left center;
+      margin-top: -2px;
+      margin-left: -30px;
+    }
+    .drum-spoke:nth-child(1) { transform: rotate(0deg); }
+    .drum-spoke:nth-child(2) { transform: rotate(60deg); }
+    .drum-spoke:nth-child(3) { transform: rotate(120deg); }
+    .drum-spoke:nth-child(4) { transform: rotate(180deg); }
+    .drum-spoke:nth-child(5) { transform: rotate(240deg); }
+    .drum-spoke:nth-child(6) { transform: rotate(300deg); }
+
+    /* Clothes shapes inside drum */
+    .clothes-shape {
+      position: absolute;
+      border-radius: 50% 50% 40% 40%;
+      opacity: 0.85;
+    }
+    .cs1 { width:30px; height:22px; background:#FFFFFF; top:8px; left:6px; transform: rotate(-15deg); }
+    .cs2 { width:22px; height:18px; background:#E3F2FD; bottom:10px; right:4px; transform: rotate(20deg); }
+    .cs3 { width:18px; height:14px; background:#B2EBF2; bottom:18px; left:12px; transform: rotate(5deg); }
+
+    /* Glass glare */
+    .washer-glare {
+      position: absolute;
+      top: 12%; left: 18%;
+      width: 28px;
+      height: 18px;
+      background: rgba(255,255,255,0.55);
+      border-radius: 50%;
+      transform: rotate(-30deg);
+    }
+
+    /* Bottom panel */
+    .washer-bottom {
+      position: absolute;
+      bottom: 18px; left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .washer-door-handle {
+      width: 36px;
+      height: 8px;
+      background: linear-gradient(90deg, #B2EBF2, #4FC3F7);
+      border-radius: 4px;
+    }
+    .washer-vent {
+      width: 10px;
+      height: 8px;
+      background: #E3F2FD;
+      border-radius: 3px;
+    }
+    .washer-vent:nth-child(3) { opacity:.7; }
+
+    /* Floating bubbles */
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, rgba(255,255,255,0.9), rgba(79,195,247,0.35));
+      border: 1.5px solid rgba(255,255,255,0.7);
+      animation: floatUp ease-in infinite;
+    }
+
+    @keyframes floatUp {
+      0%   { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+      15%  { opacity: 1; }
+      80%  { opacity: 0.7; }
+      100% { transform: translateY(-180px) translateX(var(--drift,8px)) scale(0.6); opacity: 0; }
+    }
+
+    .bubble:nth-child(1)  { width:14px; height:14px; bottom:30px; left:30px;  animation-duration:3.2s; animation-delay:0s;    --drift: 12px; }
+    .bubble:nth-child(2)  { width:10px; height:10px; bottom:20px; left:80px;  animation-duration:2.8s; animation-delay:0.6s;  --drift:-8px; }
+    .bubble:nth-child(3)  { width:18px; height:18px; bottom:10px; left:55px;  animation-duration:3.6s; animation-delay:1.2s;  --drift: 6px; }
+    .bubble:nth-child(4)  { width: 8px; height: 8px; bottom:40px; left:140px; animation-duration:2.5s; animation-delay:0.3s;  --drift:-10px; }
+    .bubble:nth-child(5)  { width:12px; height:12px; bottom:15px; left:110px; animation-duration:3.0s; animation-delay:1.8s;  --drift: 14px; }
+    .bubble:nth-child(6)  { width: 7px; height: 7px; bottom:50px; left:20px;  animation-duration:2.2s; animation-delay:0.9s;  --drift: 5px; }
+
+    /* ── HERO TEXT ── */
+    .hero-text { position: relative; z-index: 2; }
+
+    .hero-text h1 {
+      font-size: clamp(2.4rem, 7vw, 4.2rem);
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.1;
+      margin-bottom: 14px;
+      letter-spacing: -1px;
+    }
+
+    .hero-text h1 span {
+      color: var(--navy-light);
+      background: linear-gradient(90deg, #0D47A1, #0288D1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 3vw, 1.25rem);
+      color: var(--navy-light);
+      font-weight: 500;
+      margin-bottom: 32px;
+      opacity: 0.85;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 30px;
+      border-radius: 50px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: transform .2s, box-shadow .2s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn:hover  { transform: translateY(-3px); }
+    .btn:active { transform: translateY(0); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--navy), var(--navy-light));
+      color: var(--white);
+      box-shadow: 0 6px 20px rgba(13,71,161,0.35);
+    }
+    .btn-primary:hover { box-shadow: 0 10px 28px rgba(13,71,161,0.45); }
+
+    .btn-secondary {
+      background: var(--white);
+      color: var(--navy);
+      box-shadow: 0 6px 20px rgba(13,71,161,0.15);
+    }
+    .btn-secondary:hover { box-shadow: 0 10px 28px rgba(13,71,161,0.25); }
+
+    /* ── SCROLL ARROW ── */
+    .scroll-hint {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      opacity: 0.55;
+      animation: bounce 2s infinite;
+    }
+    .scroll-hint span { font-size: .75rem; font-family: 'Inter', sans-serif; color: var(--navy); letter-spacing: 1px; text-transform: uppercase; }
+    .scroll-arrow { width: 22px; height: 22px; border-right: 3px solid var(--navy); border-bottom: 3px solid var(--navy); transform: rotate(45deg); border-radius:
