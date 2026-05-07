@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ $json.name }} – Fresh. Fast. Easy.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sky: #4FC3F7;
+      --aqua: #E0F7FA;
+      --aqua-mid: #B2EBF2;
+      --navy: #0D47A1;
+      --navy-light: #1565C0;
+      --white: #FFFFFF;
+      --text: #1A237E;
+      --text-light: #37474F;
+      --shadow: 0 8px 32px rgba(13,71,161,0.10);
+      --radius: 20px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3 { font-family: 'Poppins', sans-serif; }
+
+    /* ─── HERO ─────────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      background: linear-gradient(160deg, #E0F7FA 0%, #B2EBF2 40%, #81D4FA 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 20px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Background bubbles (decorative) */
+    .bg-bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+      animation: bgFloat linear infinite;
+    }
+    .bg-bubble:nth-child(1)  { width:80px;  height:80px;  left:8%;   animation-duration:12s; animation-delay:0s;   bottom:-80px; }
+    .bg-bubble:nth-child(2)  { width:50px;  height:50px;  left:20%;  animation-duration:9s;  animation-delay:2s;   bottom:-50px; }
+    .bg-bubble:nth-child(3)  { width:120px; height:120px; left:38%;  animation-duration:14s; animation-delay:1s;   bottom:-120px; }
+    .bg-bubble:nth-child(4)  { width:40px;  height:40px;  left:60%;  animation-duration:8s;  animation-delay:3s;   bottom:-40px; }
+    .bg-bubble:nth-child(5)  { width:90px;  height:90px;  left:75%;  animation-duration:11s; animation-delay:0.5s; bottom:-90px; }
+    .bg-bubble:nth-child(6)  { width:60px;  height:60px;  left:88%;  animation-duration:10s; animation-delay:4s;   bottom:-60px; }
+
+    @keyframes bgFloat {
+      0%   { transform: translateY(0) scale(1);   opacity:0.5; }
+      50%  { opacity: 0.3; }
+      100% { transform: translateY(-110vh) scale(1.1); opacity:0; }
+    }
+
+    /* ── Washing machine illustration ── */
+    .machine-wrap {
+      position: relative;
+      width: 200px;
+      height: 240px;
+      margin-bottom: 32px;
+    }
+
+    /* Body of machine */
+    .machine-body {
+      position: absolute;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 180px;
+      height: 210px;
+      background: linear-gradient(135deg, #FFFFFF 60%, #E3F2FD 100%);
+      border-radius: 24px;
+      box-shadow: 0 12px 40px rgba(13,71,161,0.18), inset 0 2px 6px rgba(255,255,255,0.8);
+    }
+
+    /* Top panel */
+    .machine-top-panel {
+      position: absolute;
+      top: 14px; left: 50%;
+      transform: translateX(-50%);
+      width: 150px;
+      height: 28px;
+      background: linear-gradient(90deg, #4FC3F7, #29B6F6);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 14px;
+      gap: 7px;
+    }
+    .machine-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.7);
+    }
+    .machine-dot.on {
+      background: #A5F3FC;
+      box-shadow: 0 0 6px #22D3EE;
+      animation: blink 2s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    /* Porthole */
+    .porthole-outer {
+      position: absolute;
+      top: 56px; left: 50%;
+      transform: translateX(-50%);
+      width: 116px; height: 116px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #B3E5FC, #4FC3F7);
+      box-shadow: 0 4px 16px rgba(13,71,161,0.2), inset 0 3px 10px rgba(255,255,255,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .porthole-inner {
+      width: 96px; height: 96px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #E0F7FA 0%, #0288D1 70%, #01579B 100%);
+      overflow: hidden;
+      position: relative;
+      box-shadow: inset 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    /* Spinning drum lines */
+    .drum {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      animation: spin 2.4s linear infinite;
+    }
+    .drum-line {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 90%; height: 3px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 2px;
+      transform-origin: left center;
+    }
+    .drum-line:nth-child(1) { transform: translateY(-50%) rotate(0deg)   translateX(-50%); }
+    .drum-line:nth-child(2) { transform: translateY(-50%) rotate(45deg)  translateX(-50%); }
+    .drum-line:nth-child(3) { transform: translateY(-50%) rotate(90deg)  translateX(-50%); }
+    .drum-line:nth-child(4) { transform: translateY(-50%) rotate(135deg) translateX(-50%); }
+
+    /* Clothes shapes inside drum */
+    .clothes-shape {
+      position: absolute;
+      border-radius: 8px;
+      animation: tumble 2.4s linear infinite;
+    }
+    .cs1 { width:28px; height:18px; background:rgba(255,255,255,0.85); top:20%; left:15%; }
+    .cs2 { width:22px; height:14px; background:rgba(224,247,250,0.8);  bottom:22%; right:14%; }
+    .cs3 { width:18px; height:22px; background:rgba(255,255,255,0.7);  top:50%;  left:55%; }
+
+    @keyframes spin   { to { transform: rotate(360deg); } }
+    @keyframes tumble { 0%{transform:rotate(0deg) translate(4px,2px)} 50%{transform:rotate(180deg) translate(-4px,-2px)} 100%{transform:rotate(360deg) translate(4px,2px)} }
+
+    /* Soap dispenser / bottom detail */
+    .machine-bottom {
+      position: absolute;
+      bottom: 16px; left: 50%;
+      transform: translateX(-50%);
+      width: 120px; height: 14px;
+      background: linear-gradient(90deg, #B3E5FC, #4FC3F7, #B3E5FC);
+      border-radius: 7px;
+      opacity: 0.7;
+    }
+
+    /* Floating bubbles from machine */
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.95), rgba(144,224,255,0.5));
+      box-shadow: inset 0 1px 3px rgba(255,255,255,0.8), 0 2px 8px rgba(79,195,247,0.3);
+      animation: floatUp ease-in infinite;
+    }
+    .bubble:nth-child(1) { width:14px; height:14px; left:30%; animation-duration:3.2s; animation-delay:0s;   bottom:230px; }
+    .bubble:nth-child(2) { width:9px;  height:9px;  left:55%; animation-duration:2.6s; animation-delay:0.8s; bottom:230px; }
+    .bubble:nth-child(3) { width:18px; height:18px; left:70%; animation-duration:4.0s; animation-delay:1.4s; bottom:230px; }
+    .bubble:nth-child(4) { width:11px; height:11px; left:20%; animation-duration:3.6s; animation-delay:2.1s; bottom:230px; }
+    .bubble:nth-child(5) { width:7px;  height:7px;  left:82%; animation-duration:2.9s; animation-delay:0.4s; bottom:230px; }
+
+    @keyframes floatUp {
+      0%   { transform: translateY(0)   scale(1);   opacity: 0.9; }
+      80%  { opacity: 0.6; }
+      100% { transform: translateY(-160px) scale(0.5); opacity: 0; }
+    }
+
+    /* Hero text */
+    .hero-headline {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(2.2rem, 7vw, 3.6rem);
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 3.5vw, 1.25rem);
+      font-weight: 500;
+      color: var(--navy-light);
+      margin-bottom: 8px;
+    }
+    .hero-name {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(0.9rem, 2.5vw, 1.05rem);
+      font-weight: 600;
+      color: #0288D1;
+      letter-spacing: 0.04em;
+      margin-bottom: 36px;
+      text-transform: uppercase;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 32px;
+      border-radius: 50px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn:hover { transform: translateY(-3px); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--navy), var(--navy-light));
+      color: var(--white);
+      box-shadow: 0 8px 24px rgba(13,71,161,0.30);
+    }
+    .btn-primary:hover { box-shadow: 0 12px 32px rgba(13,71,161,0.40); }
+
+    .btn-secondary {
+      background: var(--white);
+      color: var(--navy);
+      box-shadow: 0 8px 24px rgba(13,71,161,0.15);
+      border: 2px solid rgba(13,71,161,0.15);
+    }
+    .btn-secondary:hover { box-shadow: 0 12px 32px rgba(13,71,161,0.25); }
+
+    /* Scroll hint */
+    .scroll-hint {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: var(--navy-light);
+      font-size: 0.75rem;
+      font-weight: 500;
+      opacity: 0.7;
+    }
+    .scroll-arrow {
+      width: 22px; height: 22px;
+      border-right: 2.5px solid var(--navy-light);
+      border-bottom: 2.5px solid var(--navy-light);
+      transform: rotate(45deg);
+      animation: bounce 1.6s ease-in-out infinite;
+    }
+    @keyframes bounce { 0%,100%{transform:rotate(45deg) translateY(0)} 50%{transform:rotate(45deg) translateY(5px)} }
+
+    /* ─── SECTIONS COMMON ───────────────────────────────────────── */
+    section { padding: 80px 20px; }
+
+    .section-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-tag {
+      display: inline-block;
+      background: var(--aqua);
+      color: #0288D1;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 50px;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: clamp(1.7rem, 5vw, 2.4rem);
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 14px;
+      line
